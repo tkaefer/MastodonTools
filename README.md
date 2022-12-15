@@ -25,6 +25,11 @@ Use a CSV file with this structure:
 ...
 ```
 
+You could use the example file `domainblocks-example.csv` which is derived from [joinfediverse.wiki/FediBlock](https://joinfediverse.wiki/FediBlock), eg.:
+```
+cp domainblocks-example.csv domainblocks.csv
+```
+
 ### Setup the credentials.yaml file
 
 copy `credentials.yaml.default` to `credentials.yaml`
