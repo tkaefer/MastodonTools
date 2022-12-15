@@ -45,19 +45,20 @@ def main(argv):
 
 
     domain_blocks = mastodon.admin_domain_blocks()
+    domain_blocks = mastodon.fetch_remaining(domain_blocks)
 
     domain_dict = dict(map(lambda x: (x['domain'], x['id']), domain_blocks))
-
 
     with open(input_file, mode='r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         line_count = 0
         for row in csv_reader:
             if line_count > 0:
-                domain_to_block=row['domain']
+                domain_to_block=repr(row['domain'].encode('idna'))
+                print(domain_to_block)
                 public_comment=f'{row["block reason"]} {row["when blocked"]}'
                 if domain_to_block in list(domain_dict.keys()):
-                    print(f'add {row}')
+                    print(f'update {row}')
                     block_id=domain_dict[domain_to_block]
                     result = mastodon.admin_update_domain_block(id=block_id, severity='suspend', public_comment=public_comment) 
                     print(result)
