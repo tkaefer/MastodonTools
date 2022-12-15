@@ -57,6 +57,7 @@ def main(argv):
                 domain_to_block=repr(row['domain'].encode('idna'))
                 print(domain_to_block)
                 public_comment=f'{row["block reason"]} {row["when blocked"]}'
+                obfuscate=row['obfuscate'].lower() in ['true', '1', 't', 'y', 'yes'] or False
                 if domain_to_block in list(domain_dict.keys()):
                     print(f'update {row}')
                     block_id=domain_dict[domain_to_block]

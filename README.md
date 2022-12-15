@@ -10,6 +10,7 @@ As it seems there will be, see [this pull request on GitHub](https://github.com/
 * externalized credentials
 * use CSV to import
 * add and update blocks
+* make each item obfuscatable
 
 ## What is not working
 * un block
@@ -19,9 +20,9 @@ As it seems there will be, see [this pull request on GitHub](https://github.com/
 ### Create a CSV file 
 Use a CSV file with this structure:
 ```
-"domain","when blocked","block reason"
-"kenfm.de","taken from fediblock.org","racism, conspiracism, covid denial"
-"froth.zone","2022-11-26","harassment, racism"
+"domain","when blocked","block reason","obfuscate"
+"kenfm.de","taken from fediblock.org","racism, conspiracism, covid denial","True"
+"froth.zone","2022-11-26","harassment, racism","yes"
 ...
 ```
 
