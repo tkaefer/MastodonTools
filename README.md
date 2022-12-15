@@ -11,9 +11,10 @@ As it seems there will be, see [this pull request on GitHub](https://github.com/
 * use CSV to import
 * add and update blocks
 * make each item obfuscatable
+* delete blocks
 
 ## What is not working
-* un block
+* everything not mentioned in "What is working" ;) 
 
 ## How to use
 
@@ -59,8 +60,14 @@ pip3 install pyyaml
 
 ### Run the script
 
+#### add or update domain blocks
 ```
 python3 blockDomains.py -c credentials.yaml -i domainblocks.csv
+```
+
+#### delete domain blocks
+```
+python3 deleteDomainBlocks.py -c credentials.yaml -i domainblocks.csv
 ```
 
 
