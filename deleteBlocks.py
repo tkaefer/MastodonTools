@@ -17,7 +17,7 @@ def main(argv):
     opts, args = getopt.getopt(argv,"hi:c:")
     for opt, arg in opts:
         if opt == '-h':
-            print ('blockDomains.py -c <credentials file> -i <inputfile>')
+            print ('deleteBlocks.py -c <credentials file> -i <inputfile>')
             sys.exit()
         elif opt in ("-i"):
             input_file = arg
@@ -56,26 +56,14 @@ def main(argv):
             if line_count > 0:
                 domain_to_block=row['domain'].encode('idna').decode('ascii')
                 print(domain_to_block)
-                public_comment=f'{row["block reason"]} {row["when blocked"]}'
-                obfuscate=row['obfuscate'].lower() in ['true', '1', 't', 'y', 'yes'] or False
                 if domain_to_block in list(domain_dict.keys()):
-                    print(f'update {row}')
+                    print(f'delete {row}')
                     block_id=domain_dict[domain_to_block]
-                    result = mastodon.admin_update_domain_block(id=block_id, severity='suspend', public_comment=public_comment, obfuscate=obfuscate) 
+                    result = mastodon.admin_delete_domain_block(block_id)
                     print(result)
-                else:
-                    print(f'add {row}')
-                    result = mastodon.admin_create_domain_block(domain=domain_to_block, severity='suspend', public_comment=public_comment, obfuscate=obfuscate) 
-                    print(result)
-                    domain_dict[result['domain']] = result['id']
-            line_count += 1        
-
-
+            line_count += 1
+                    
 
 # print (json.dumps(domain_names, indent=4, default=str))
 if __name__ == "__main__":
    main(sys.argv[1:])
-
-
-
-
